@@ -1,0 +1,4 @@
+^{:react-native :expo
+  ;; :react-native-auto-refresh false
+  :launch-js ["yarn" "ios"]}
+{:main awesome.main}

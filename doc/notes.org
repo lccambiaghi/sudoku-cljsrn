@@ -1,0 +1,26 @@
+* Javascript -> Clojurescript
+** View
+#+BEGIN_SRC javascript
+<View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <Text>
+        Try editing me! 🎉
+      </Text>
+    </View>
+#+END_SRC
+
+#+begin_src clojure
+(<> rn/View
+      #js {:style #js {:backgroundColor "#FFFFFF"
+                       :flex            1
+                       :justifyContent  "center"}}
+      (<> rn/Text
+          #js {:style #js {:color     "black"
+                           :textAlign "center"}}
+          (str "HELLO WORLD!!")))
+#+end_src
+* [[https://reactnative.dev/docs/intro-react-native-components#core-components][Core Components]]
+- View
+- Text
+- Image
+- ScrollView
+- TextInput

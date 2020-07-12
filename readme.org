@@ -1,0 +1,20 @@
+* Develop
+Start ~figwheel~ and ~react-native~:
+#+BEGIN_SRC sh
+clj -m figwheel.main -b ios -r
+#+END_SRC
+
+Or simply ~cider-jack-in-cljs~.
+
+* Ideas
+- Start simple with todo app and navigation
+- Try matrix rain with quil: https://github.com/mmzsource/matrixrain/blob/master/src/matrixrain/core.cljs
+- Try simple game with play-cljc: https://github.com/Phantas0s/sokoban
+
+* References
+- Figwheel: https://figwheel.org/docs/react-native.html
+- React native navigation: https://github.com/seantempesta/cljs-react-navigation
+- Luno cities: https://github.com/alwx/luno-react-native
+- ToDo app: https://github.com/Slowyn/DevDayToDo
+- Flexbox: https://philipwalton.github.io/solved-by-flexbox/
+- ReactNative docs: https://reactnative.dev/docs/getting-started

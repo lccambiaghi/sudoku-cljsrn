@@ -1,0 +1,6 @@
+{:deps {org.clojure/clojurescript     {:mvn/version "1.10.773"}
+        io.vouch/reagent-react-native {:git/url "https://github.com/vouch-opensource/reagent-react-native.git"
+                                       :sha     "54bf52788ab051920ed7641f386177374419e847"}
+        reagent                       {:mvn/version "0.10.0"
+                                       :exclusions  [cljsjs/react cljsjs/react-dom]}
+        com.bhauman/figwheel-main     {:mvn/version "0.2.10-SNAPSHOT"}}}
