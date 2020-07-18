@@ -10,6 +10,7 @@ Or simply ~cider-jack-in-cljs~.
 - Start simple with todo app and navigation
 - Try matrix rain with quil: https://github.com/mmzsource/matrixrain/blob/master/src/matrixrain/core.cljs
 - Try simple game with play-cljc: https://github.com/Phantas0s/sokoban
+- Add TailwindCSS: https://github.com/vadimdemedes/tailwind-rn
 
 * References
 - Figwheel: https://figwheel.org/docs/react-native.html

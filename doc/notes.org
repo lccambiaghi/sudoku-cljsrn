@@ -1,5 +1,4 @@
 * Javascript -> Clojurescript
-** View
 #+BEGIN_SRC javascript
 <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <Text>
@@ -24,3 +23,5 @@
 - Image
 - ScrollView
 - TextInput
+* [[https://cljdoc.org/d/reagent/reagent/1.0.0-alpha2/doc/tutorials/-wip-managing-state-atoms-cursors-reactions-and-tracking#intro-to-atoms][Reagent state]]
+* [[https://reactnative.dev/docs/flexbox#flex][Flexbox]]
