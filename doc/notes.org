@@ -1,4 +1,5 @@
 * Javascript -> Clojurescript
+** Basic conversion
 #+BEGIN_SRC javascript
 <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <Text>
@@ -17,11 +18,69 @@
                            :textAlign "center"}}
           (str "HELLO WORLD!!")))
 #+end_src
+** Elaborate conversion
+#+BEGIN_SRC javascript
+const SectionListBasics = () => {
+    return (
+      <View style={styles.container}>
+        <SectionList
+          sections={[
+            {title: 'D', data: ['Devin', 'Dan', 'Dominic']},
+            {title: 'J', data: ['Jackson', 'James', 'Jillian', 'Jimmy', 'Joel', 'John', 'Julie']},
+          ]}
+          renderItem={({item}) => <Text style={styles.item}>{item}</Text>}
+          renderSectionHeader={({section}) => <Text style={styles.sectionHeader}>{section.title}</Text>}
+          keyExtractor={(item, index) => index}
+        />
+      </View>
+    );
+}
+#+END_SRC
+
+#+begin_src clojurescript
+(defn section-list []
+  [rrn/section-list
+   {:sections [{:title "D" :data ["Devin", "Dan", "Dominic"]}
+               {:title "J" :data ["Jay", "Jackson"]}]
+    :render-item (fn [item] (<> rn/Text
+                                #js {:style #js {:color     "black"
+                                                 :textAlign "center"}}
+                                (.-item item)
+                                ))
+    :render-section-header (fn [section] (<> rn/Text
+                                             #js {:style #js {:color     "black"
+                                                              :textAlign "center"}}
+                                             (.-title (.-section section))))
+    :key-extractor (fn [item ix] ix)}])
+#+end_src
+
 * [[https://reactnative.dev/docs/intro-react-native-components#core-components][Core Components]]
 - View
 - Text
 - Image
 - ScrollView
 - TextInput
+* FlatList
+The ~render-item~ function is passed a single argument, an object.
+We can access the data accessing the ~.-item~ key.
 * [[https://cljdoc.org/d/reagent/reagent/1.0.0-alpha2/doc/tutorials/-wip-managing-state-atoms-cursors-reactions-and-tracking#intro-to-atoms][Reagent state]]
 * [[https://reactnative.dev/docs/flexbox#flex][Flexbox]]
+
+* Ideas
+- Start simple with todo app and navigation
+- Try matrix rain with quil: https://github.com/mmzsource/matrixrain/blob/master/src/matrixrain/core.cljs
+- Try simple game with play-cljc: https://github.com/Phantas0s/sokoban
+- Add TailwindCSS: https://github.com/vadimdemedes/tailwind-rn
+
+ 
+* Docs
+- Figwheel: https://figwheel.org/docs/react-native.html
+- ReactNative docs: https://reactnative.dev/docs/getting-started
+- React native navigation: https://github.com/seantempesta/cljs-react-navigation
+- Flexbox: https://philipwalton.github.io/solved-by-flexbox/
+
+* Examples
+- Luno cities: https://github.com/alwx/luno-react-native
+- ToDo app: https://github.com/Slowyn/DevDayToDo
+- Example of react-native and cljs: https://github.com/idokutela/reagent-native/blob/master/reagent_native/core.cljs
+- Another example: https://github.com/mfikes/reagent-react-native/blob/master/AwesomeProject/ClojureScript/awesome-project/src/awesome_project/core.cljs

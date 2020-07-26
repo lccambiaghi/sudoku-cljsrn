@@ -1,4 +1,4 @@
-(ns sudoku.core)
+(ns app.sudoku)
 
 (defn row []
   "A row is a map, up to 9 elements long. Keys are row indices and values are numbers filling that index. Only 4 elements are filled"
@@ -11,8 +11,8 @@
   (and (apply distinct? (keys row)) (apply distinct? (vals row))))
 
 (defn nine-rows []
-  (let [rows          (repeatedly row)
-        legal-rows    (filter valid-row? rows)]
+  (let [rows       (repeatedly row)
+        legal-rows (filter valid-row? rows)]
     (take 9 legal-rows)))
 
 (defn unique? [coll]
@@ -36,8 +36,8 @@
 
 (defn valid-blocks? [rows]
   "The first block is defined by numbers in the first 3 rows and first 3 columns. A number cannot appear twice in a block."
-  (let [triplets   (partition 3 rows)
-        blocks     (apply concat (map three-rows->blocks triplets))]
+  (let [triplets (partition 3 rows)
+        blocks   (apply concat (map three-rows->blocks triplets))]
     (every? true? (map unique? blocks))))
 
 (defn grid []
