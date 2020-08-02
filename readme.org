@@ -1,3 +1,7 @@
+* Description
+Learning ~react-native~ with ~clojurescript~!
+[[file:assets/screen.png]]
+
 * Setup
 Follow figwheel docs: https://figwheel.org/docs/react-native.html
 
