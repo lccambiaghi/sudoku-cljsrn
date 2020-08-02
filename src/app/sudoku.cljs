@@ -45,3 +45,21 @@
   (let [legal-rows  (repeatedly nine-rows)
         sudoku-rows (filter #(and (valid-columns? %) (valid-blocks? %)) legal-rows)]
     (first sudoku-rows)))
+
+(defn add-keywords [grid]
+  (->> (map-indexed vector grid)
+       (reduce (fn [result [ix row]]
+                 (->> row
+                      (map (fn [[col number]]
+                             {:index (+ (* ix 9) col) :row (inc ix) :column col :key number}))
+                      (conj result)))
+               [])))
+
+(defn complete-grid []
+  (let [grid-kw  (-> (grid) add-keywords)
+        existing (->> grid-kw flatten (map :index) set)
+        all      (for [n (range 1 (inc 81))]
+                   {:index n :row (rem n 9) :col (rem n 9)})
+        missing  (remove #(contains? existing (:index %)) all)
+        parts    (partition-by #(quot (:index %) 10) missing)]
+    (mapv concat grid-kw parts)))
