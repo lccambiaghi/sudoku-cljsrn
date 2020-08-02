@@ -39,20 +39,23 @@
                :width             40      :height            40}]
     style))
 
-(def grid (sudoku/complete-grid))
+(defonce grid (->> (sudoku/complete-grid) flatten (sort-by :index) (into [])))
 
-;; (->> (merge cells (flatten (add-keywords grid)))
-;;      (sort-by (juxt :row :column)))
+(def state (r/atom grid))
+;; (assoc-in @grid [1 :key] 4)
+;; (filter #(= (% :index) 81) @grid)
+;; (swap! grid assoc-in [1 :key] 4)
 
 (defn render-number [item]
   (r/as-element
    [rrn/view {:style (cell-style item)}
-    (let [number (.-key (.-item item))]
+    (let [number (.-key (.-item item))
+          index  (.-index (.-item item))]
       (if number
         [rrn/text {:style (:number styles)} (.-key (.-item item))]
-        [rrn/text-input {:style (:number styles)
-                         ;; :placeholder   "!!"
-                         ;; :on-change-text #(swap! state assoc :text %)
+        [rrn/text-input {:style       (:number styles)
+                         ;; :placeholder (str index)
+                         :on-change-text #(swap! grid assoc-in [(dec index) :key] %)
                          ;; :default-value "!!"
                          }]))]))
 
@@ -60,11 +63,9 @@
   [rrn/safe-area-view {:style (:container styles)}
    [rrn/text {:style (:title styles)} "Sudoku"]
    [rrn/flat-list
-    {:data        (->> grid flatten (sort-by :index))
+    {:data        @grid
      :render-item render-number
-     :num-columns 9
-     ;; :column-wrapper-style {:style {:flex 1 :justify-content "space-around"}}
-     }]])
+     :num-columns 9}]])
 
 (defn renderfn [props]
   (r/as-element [page]))
