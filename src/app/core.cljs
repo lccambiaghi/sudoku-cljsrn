@@ -39,9 +39,7 @@
                :width             40      :height            40}]
     style))
 
-(def numbers (into [] (for [n (range 1 (inc 81))] {:key n})))
-
-(defonce grid (->> (complete-grid) flatten (sort-by :index) (into [])))
+(defonce grid (->> (sudoku/complete-grid) flatten (sort-by :index) (into [])))
 
 (def state (r/atom grid))
 ;; (assoc-in @grid [1 :key] 4)
@@ -55,9 +53,9 @@
           index  (.-index (.-item item))]
       (if number
         [rrn/text {:style (:number styles)} (.-key (.-item item))]
-        [rrn/text-input {:style (:number styles)
+        [rrn/text-input {:style       (:number styles)
                          ;; :placeholder (str index)
-                         ;; :on-change-text #(swap! grid assoc-in [(dec index) :key] %)
+                         :on-change-text #(swap! grid assoc-in [(dec index) :key] %)
                          ;; :default-value "!!"
                          }]))]))
 
@@ -65,8 +63,7 @@
   [rrn/safe-area-view {:style (:container styles)}
    [rrn/text {:style (:title styles)} "Sudoku"]
    [rrn/flat-list
-    {:data        @state
-     ;; :data        numbers
+    {:data        @grid
      :render-item render-number
      :num-columns 9}]])
 
