@@ -39,9 +39,8 @@
                :width             40      :height            40}]
     style))
 
-(defonce grid (->> (sudoku/complete-grid) flatten (sort-by :index) (into [])))
+(defonce grid (->> (sudoku/complete-grid) flatten (sort-by :index) (into []) r/atom))
 
-(def state (r/atom grid))
 ;; (assoc-in @grid [1 :key] 4)
 ;; (filter #(= (% :index) 81) @grid)
 ;; (swap! grid assoc-in [1 :key] 4)
@@ -53,7 +52,7 @@
           index  (.-index (.-item item))]
       (if number
         [rrn/text {:style (:number styles)} (.-key (.-item item))]
-        [rrn/text-input {:style       (:number styles)
+        [rrn/text-input {:style          (:number styles)
                          ;; :placeholder (str index)
                          :on-change-text #(swap! grid assoc-in [(dec index) :key] %)
                          ;; :default-value "!!"
